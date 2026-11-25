@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avengers: Doomsday - Unser Date</title>
+
+<style>
+:root {
+    --doom-green: #55ff63;
+    --doom-light: #baffb6;
+    --doom-dark: #17351d;
+    --silver: #d9e0db;
+    --black: #020403;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+
+    background:
+        radial-gradient(circle at 50% 0%,
+            rgba(70,255,90,.18),
+            transparent 35%
+        ),
+        radial-gradient(circle at 80% 80%,
+            rgba(35,120,48,.12),
+            transparent 45%
+        ),
+        linear-gradient(
+            145deg,
+            #010302,
+            #07100a 50%,
+            #010201
+        );
+}
+
+/* Scanline / cinematic effect */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,.012),
+            rgba(255,255,255,.012) 1px,
+            transparent 1px,
+            transparent 5px
+        );
+}
+
+/* Green atmospheric glow */
+body::after {
+    content: "";
+    position: fixed;
+
+    top: -500px;
+    left: 50%;
+
+    width: 800px;
+    height: 800px;
+
+    transform: translateX(-50%);
+    border-radius: 50%;
+
+    background: #51ff5d;
+    opacity: .07;
+    filter: blur(130px);
+
+    pointer-events: none;
+}
+
+/* --------------------------------
+   MAIN CARD
+-------------------------------- */
+
+.app {
+    position: relative;
+
+    width: min(92vw, 650px);
+    min-height: 650px;
+
+    padding: 35px 40px;
+
+    text-align: center;
+    overflow: hidden;
+
+    border-radius: 25px;
+
+    border:
+        1px solid
+        rgba(120,255,130,.2);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(13,21,14,.96),
+            rgba(2,5,3,.985)
+        );
+
+    box-shadow:
+        0 40px 100px rgba(0,0,0,.9),
+        0 0 80px rgba(50,255,70,.07),
+        inset 0 1px rgba(255,255,255,.07);
+}
+
+.app::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 15%;
+    right: 15%;
+
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--doom-green),
+            white,
+            var(--doom-green),
+            transparent
+        );
+
+    box-shadow:
+        0 0 20px
+        var(--doom-green);
+}
+
+
+/* --------------------------------
+   CORNERS
+-------------------------------- */
+
+.corner {
+    position: absolute;
+
+    width: 48px;
+    height: 48px;
+
+    opacity: .3;
+
+    pointer-events: none;
+}
+
+.corner1 {
+    top: 16px;
+    left: 16px;
+
+    border-left:
+        1px solid
+        var(--doom-green);
+
+    border-top:
+        1px solid
+        var(--doom-green);
+}
+
+.corner2 {
+    right: 16px;
+    bottom: 16px;
+
+    border-right:
+        1px solid
+        var(--doom-green);
+
+    border-bottom:
+        1px solid
+        var(--doom-green);
+}
+
+
+/* --------------------------------
+   SCREENS
+-------------------------------- */
+
+.screen {
+    position: relative;
+    z-index: 2;
+
+    animation:
+        appear
+        .55s
+        ease;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes appear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(15px)
+            scale(.98);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+/* --------------------------------
+   LOGO
+-------------------------------- */
+
+.logo-wrapper {
+    position: relative;
+
+    height: 180px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 5px;
+}
+
+.logo-glow {
+    position: absolute;
+
+    width: 300px;
+    height: 100px;
+
+    background:
+        var(--doom-green);
+
+    opacity: .13;
+
+    filter:
+        blur(55px);
+
+    border-radius: 50%;
+}
+
+.logo {
+    position: relative;
+
+    width: 85%;
+    max-width: 390px;
+    max-height: 170px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 0 6px
+            rgba(255,255,255,.2)
+        )
+        drop-shadow(
+            0 0 25px
+            rgba(64,255,78,.22)
+        );
+
+    transition:
+        .4s ease;
+}
+
+.logo:hover {
+    transform:
+        scale(1.04);
+
+    filter:
+        drop-shadow(
+            0 0 8px
+            rgba(255,255,255,.35)
+        )
+        drop-shadow(
+            0 0 38px
+            rgba(65,255,80,.4)
+        );
+}
+
+
+/* Wenn Logo nicht gefunden wird */
+
+.logo-fallback {
+    display: none;
+
+    font-size: 37px;
+    font-weight: 900;
+
+    letter-spacing: 3px;
+
+    color:
+        var(--silver);
+}
+
+
+/* --------------------------------
+   TEXT
+-------------------------------- */
+
+.label {
+    display: inline-block;
+
+    margin-bottom: 18px;
+
+    padding:
+        7px
+        14px;
+
+    border-radius: 50px;
+
+    border:
+        1px solid
+        rgba(110,255,115,.28);
+
+    background:
+        rgba(70,255,80,.05);
+
+    color:
+        #83ff84;
+
+    font-size:
+        10px;
+
+    font-weight:
+        bold;
+
+    letter-spacing:
+        3px;
+}
+
+h1 {
+    margin:
+        5px
+        0
+        14px;
+
+    font-size:
+        clamp(
+            28px,
+            5vw,
+            43px
+        );
+
+    line-height:
+        1.16;
+
+    letter-spacing:
+        -1px;
+}
+
+.green {
+    background:
+        linear-gradient(
+            180deg,
+            #f0fff0,
+            #70ff76 60%,
+            #149226
+        );
+
+    -webkit-background-clip:
+        text;
+
+    background-clip:
+        text;
+
+    color:
+        transparent;
+}
+
+.subtitle {
+    color:
+        #909b92;
+
+    font-size:
+        15px;
+
+    line-height:
+        1.55;
+}
+
+
+/* --------------------------------
+   BUTTONS
+-------------------------------- */
+
+.button-area {
+    position: relative;
+
+    height: 115px;
+
+    margin-top:
+        30px;
+}
+
+button {
+    border: none;
+
+    font-family:
+        inherit;
+
+    font-weight:
+        800;
+
+    cursor:
+        pointer;
+
+    transition:
+        transform .2s,
+        box-shadow .2s,
+        background .2s,
+        border-color .2s;
+}
+
+
+/* YES BUTTON */
+
+#yesButton {
+    padding:
+        17px
+        40px;
+
+    border-radius:
+        8px;
+
+    font-size:
+        17px;
+
+    color:
+        #031005;
+
+    background:
+        linear-gradient(
+            180deg,
+            #b3ffad,
+            #48e554
+        );
+
+    box-shadow:
+        0 10px 32px
+        rgba(60,255,75,.22);
+}
+
+#yesButton:hover {
+    transform:
+        translateY(-3px)
+        scale(1.05);
+
+    background:
+        linear-gradient(
+            180deg,
+            #d1ffce,
+            #67ff70
+        );
+
+    box-shadow:
+        0 15px 45px
+        rgba(70,255,85,.35);
+}
+
+
+/* NO BUTTON */
+
+#noButton {
+    position: absolute;
+
+    margin-left:
+        15px;
+
+    padding:
+        17px
+        29px;
+
+    border-radius:
+        8px;
+
+    color:
+        #a3aaa4;
+
+    background:
+        #171b18;
+
+    border:
+        1px solid
+        #313832;
+}
+
+
+/* --------------------------------
+   DATE SCREEN
+-------------------------------- */
+
+.symbol {
+    margin-top:
+        50px;
+
+    margin-bottom:
+        15px;
+
+    font-size:
+        50px;
+
+    filter:
+        drop-shadow(
+            0 0 17px
+            #60ff69
+        );
+}
+
+.dates {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap:
+        11px;
+
+    margin-top:
+        30px;
+}
+
+.date-button {
+    position: relative;
+
+    overflow: hidden;
+
+    padding:
+        19px
+        14px;
+
+    border-radius:
+        8px;
+
+    border:
+        1px solid
+        #263329;
+
+    color:
+        #d9ded9;
+
+    background:
+        linear-gradient(
+            145deg,
+            #121813,
+            #080b09
+        );
+
+    font-size:
+        16px;
+
+    letter-spacing:
+        .5px;
+}
+
+.date-button::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width:
+        3px;
+
+    background:
+        var(--doom-green);
+
+    opacity:
+        .55;
+}
+
+.date-button:hover {
+    transform:
+        translateY(-3px);
+
+    color:
+        white;
+
+    border-color:
+        var(--doom-green);
+
+    box-shadow:
+        0 0 28px
+        rgba(70,255,85,.18);
+}
+
+
+/* --------------------------------
+   SUCCESS
+-------------------------------- */
+
+.heart {
+    margin-top:
+        55px;
+
+    font-size:
+        85px;
+
+    animation:
+        heartbeat
+        1.3s
+        infinite;
+
+    filter:
+        drop-shadow(
+            0 0 25px
+            rgba(80,255,88,.5)
+        );
+}
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform:
+            scale(1);
+    }
+
+    20% {
+        transform:
+            scale(1.14);
+    }
+
+    35% {
+        transform:
+            scale(1);
+    }
+
+    50% {
+        transform:
+            scale(1.08);
+    }
+
+}
+
+.big-title {
+    font-size:
+        clamp(
+            44px,
+            8vw,
+            60px
+        );
+}
+
+
+/* --------------------------------
+   TICKET
+-------------------------------- */
+
+.ticket {
+    max-width:
+        400px;
+
+    margin:
+        28px
+        auto
+        0;
+
+    padding:
+        23px;
+
+    border-radius:
+        10px;
+
+    border:
+        1px dashed
+        rgba(120,255,130,.45);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(60,255,70,.08),
+            rgba(255,255,255,.025)
+        );
+
+    box-shadow:
+        0 18px 50px
+        rgba(0,0,0,.28);
+}
+
+.ticket-label {
+    color:
+        var(--doom-green);
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        4px;
+}
+
+.movie-name {
+    margin-top:
+        12px;
+
+    font-size:
+        22px;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        .8px;
+}
+
+#chosenDate {
+    margin-top:
+        14px;
+
+    color:
+        var(--doom-light);
+
+    font-size:
+        19px;
+
+    font-weight:
+        bold;
+}
+
+.icons {
+    margin-top:
+        16px;
+
+    font-size:
+        21px;
+}
+
+.ps {
+    margin-top:
+        33px;
+
+    color:
+        #68726a;
+
+    font-size:
+        12px;
+}
+
+
+/* --------------------------------
+   MOBILE
+-------------------------------- */
+
+@media
+(max-width: 520px) {
+
+    body {
+        overflow-y:
+            auto;
+    }
+
+    .app {
+        width:
+            94vw;
+
+        min-height:
+            620px;
+
+        margin:
+            20px
+            0;
+
+        padding:
+            27px
+            20px;
+    }
+
+    .logo-wrapper {
+        height:
+            145px;
+    }
+
+    .logo {
+        max-height:
+            130px;
+    }
+
+    .dates {
+        grid-template-columns:
+            1fr;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<main class="app">
+
+<div class="corner corner1"></div>
+<div class="corner corner2"></div>
+
+
+<!-- ===============================
+     SEITE 1
+     FRAGE
+=============================== -->
+
+<section
+    id="questionScreen"
+    class="screen"
+>
+
+    <div class="logo-wrapper">
+
+        <div class="logo-glow"></div>
+
+        <img
+            src="doomsday-logo.png"
+            class="logo"
+            alt="Avengers Doomsday"
+            onerror="
+                this.style.display='none';
+                document.getElementById('fallbackLogo').style.display='block';
+            "
+        >
+
+        <div
+            id="fallbackLogo"
+            class="logo-fallback"
+        >
+
+            AVENGERS
+
+            <br>
+
+            <span class="green">
+                DOOMSDAY
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="label">
+
+        ONE QUESTION · ONE DESTINY
+
+    </div>
+
+
+    <h1>
+
+        Willst du mit mir zu
+
+        <br>
+
+        <span class="green">
+            Avengers: Doomsday
+        </span>
+
+        <br>
+
+        ins Kino gehen?
+
+    </h1>
+
+
+    <p class="subtitle">
+
+        Das Schicksal des Universums
+        liegt in deinen Händen.
+
+        <br>
+
+        Wähle weise. 😏
+
+    </p>
+
+
+    <div class="button-area">
+
+        <button id="yesButton">
+
+            JA, NATÜRLICH ⚡
+
+        </button>
+
+
+        <button id="noButton">
+
+            Nein
+
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- ===============================
+     SEITE 2
+     DATUM AUSWÄHLEN
+=============================== -->
+
+<section
+    id="dateScreen"
+    class="screen hidden"
+>
+
+    <div class="symbol">
+        ⚡
+    </div>
+
+
+    <div class="label">
+
+        TIMELINE SELECTED
+
+    </div>
+
+
+    <h1>
+
+        <span class="green">
+
+            Sehr gute Entscheidung.
+
+        </span>
+
+        😏
+
+    </h1>
+
+
+    <p class="subtitle">
+
+        Doctor Doom akzeptiert
+        deine Antwort.
+
+        <br>
+
+        Jetzt fehlt nur noch
+        unser Datum.
+
+    </p>
+
+
+    <div class="dates">
+
+
+        <button
+            class="date-button"
+            data-date="16.12.2026"
+        >
+            16.12.2026
+        </button>
+
+
+        <button
+            class="date-button"
+            data-date="17.12.2026"
+        >
+            17.12.2026
+        </button>
+
+
+        <button
+            class="date-button"
+            data-date="18.12.2026"
+        >
+            18.12.2026
+        </button>
+
+
+        <button
+            class="date-button"
+            data-date="20.12.2026"
+        >
+            20.12.2026
+        </button>
+
+
+        <button
+            class="date-button"
+            data-date="21.12.2026"
+        >
+            21.12.2026
+        </button>
+
+
+        <button
+            class="date-button"
+            data-date="22.12.2026"
+        >
+            22.12.2026
+        </button>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ===============================
+     SEITE 3
+     DATE BESTÄTIGT
+=============================== -->
+
+<section
+    id="successScreen"
+    class="screen hidden"
+>
+
+    <div class="heart">
+
+        💚
+
+    </div>
+
+
+    <h1 class="big-title">
+
+        JAIII!
+
+    </h1>
+
+
+    <h1 class="green">
+
+        Wir haben ein Date!
+
+    </h1>
+
+
+    <div class="ticket">
+
+
+        <div class="ticket-label">
+
+            MOVIE DATE CONFIRMED
+
+        </div>
+
+
+        <div class="movie-name">
+
+            AVENGERS: DOOMSDAY
+
+        </div>
+
+
+        <div id="chosenDate"></div>
+
+
+        <div class="icons">
+
+            🎬 &nbsp; 🍿 &nbsp; 💚
+
+        </div>
+
+
+    </div>
+
+
+    <p class="ps">
+
+        P.S. „Nein“ war in dieser
+        Timeline sowieso keine Option. 😌
+
+    </p>
+
+</section>
+
+
+</main>
+
+
+
+<script>
+
+/* ===============================
+   ELEMENTE
+=============================== */
+
+const questionScreen =
+    document.getElementById(
+        "questionScreen"
+    );
+
+const dateScreen =
+    document.getElementById(
+        "dateScreen"
+    );
+
+const successScreen =
+    document.getElementById(
+        "successScreen"
+    );
+
+const yesButton =
+    document.getElementById(
+        "yesButton"
+    );
+
+const noButton =
+    document.getElementById(
+        "noButton"
+    );
+
+const chosenDate =
+    document.getElementById(
+        "chosenDate"
+    );
+
+const dateButtons =
+    document.querySelectorAll(
+        ".date-button"
+    );
+
+
+/* ===============================
+   JA
+=============================== */
+
+yesButton.addEventListener(
+    "click",
+    function () {
+
+        questionScreen
+            .classList
+            .add("hidden");
+
+        dateScreen
+            .classList
+            .remove("hidden");
+
+    }
+);
+
+
+/* ===============================
+   NEIN BUTTON FLÜCHTET
+=============================== */
+
+function moveNoButton() {
+
+    const padding =
+        20;
+
+    const buttonWidth =
+        noButton.offsetWidth;
+
+    const buttonHeight =
+        noButton.offsetHeight;
+
+
+    const maxX =
+        window.innerWidth
+        - buttonWidth
+        - padding;
+
+
+    const maxY =
+        window.innerHeight
+        - buttonHeight
+        - padding;
+
+
+    const randomX =
+        Math.max(
+            padding,
+            Math.random()
+            * maxX
+        );
+
+
+    const randomY =
+        Math.max(
+            padding,
+            Math.random()
+            * maxY
+        );
+
+
+    noButton.style.position =
+        "fixed";
+
+
+    noButton.style.left =
+        randomX
+        + "px";
+
+
+    noButton.style.top =
+        randomY
+        + "px";
+
+
+    noButton.style.margin =
+        "0";
+
+
+    noButton.style.zIndex =
+        "9999";
+
+
+    const rotation =
+        Math.random()
+        * 14
+        - 7;
+
+
+    noButton.style.transform =
+        "rotate("
+        + rotation
+        + "deg)";
+
+}
+
+
+/* Maus kommt zum Button */
+
+noButton.addEventListener(
+    "mouseenter",
+    moveNoButton
+);
+
+
+/* Falls jemand besonders schnell ist */
+
+noButton.addEventListener(
+    "mousedown",
+    moveNoButton
+);
+
+
+/* Klick verhindern */
+
+noButton.addEventListener(
+    "click",
+    function (event) {
+
+        event.preventDefault();
+
+        moveNoButton();
+
+    }
+);
+
+
+/* Smartphone / Touch */
+
+noButton.addEventListener(
+    "touchstart",
+
+    function (event) {
+
+        event.preventDefault();
+
+        moveNoButton();
+
+    },
+
+    {
+        passive: false
+    }
+
+);
+
+
+/* ===============================
+   DATUM AUSWÄHLEN
+=============================== */
+
+dateButtons.forEach(
+    function (button) {
+
+        button.addEventListener(
+            "click",
+
+            function () {
+
+                const selectedDate =
+                    button.dataset.date;
+
+
+                chosenDate.textContent =
+                    "📅 "
+                    + selectedDate;
+
+
+                dateScreen
+                    .classList
+                    .add("hidden");
+
+
+                successScreen
+                    .classList
+                    .remove("hidden");
+
+
+                startConfetti();
+
+            }
+        );
+
+    }
+);
+
+
+/* ===============================
+   CONFETTI
+=============================== */
+
+function startConfetti() {
+
+    const symbols = [
+        "💚",
+        "✨",
+        "⚡",
+        "🍿"
+    ];
+
+
+    for (
+        let i = 0;
+        i < 35;
+        i++
+    ) {
+
+        const piece =
+            document.createElement(
+                "div"
+            );
+
+
+        const randomSymbol =
+            symbols[
+                Math.floor(
+                    Math.random()
+                    * symbols.length
+                )
+            ];
+
+
+        piece.textContent =
+            randomSymbol;
+
+
+        piece.style.position =
+            "fixed";
+
+
+        piece.style.left =
+            Math.random()
+            * 100
+            + "vw";
+
+
+        piece.style.top =
+            "-50px";
+
+
+        piece.style.fontSize =
+            (
+                14
+                + Math.random()
+                * 20
+            )
+            + "px";
+
+
+        piece.style.zIndex =
+            "9999";
+
+
+        piece.style.pointerEvents =
+            "none";
+
+
+        const duration =
+            1800
+            + Math.random()
+            * 2200;
+
+
+        document.body
+            .appendChild(
+                piece
+            );
+
+
+        piece.animate(
+
+            [
+
+                {
+                    transform:
+                        "translateY(0) "
+                        + "rotate(0deg)",
+
+                    opacity:
+                        1
+                },
+
+                {
+                    transform:
+                        "translateY(110vh) "
+                        + "rotate(540deg)",
+
+                    opacity:
+                        0
+                }
+
+            ],
+
+            {
+                duration:
+                    duration,
+
+                easing:
+                    "cubic-bezier(.2,.7,.4,1)"
+            }
+
+        );
+
+
+        setTimeout(
+
+            function () {
+
+                piece.remove();
+
+            },
+
+            duration
+
+        );
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
